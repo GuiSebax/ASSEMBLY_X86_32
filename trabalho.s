@@ -7,8 +7,10 @@ entrada_colunas: .string "Digite o número de colunas da matriz: "
 input_valor: .string "%d"
 fill: .string "Elemento [%d][%d]: "
 val_temp: .int 0
-matriz: .space 1600  # Espaço para armazenar a matriz (400 inteiros)
 nova_linha: .string "\n"
+
+.section .bss
+matriz: .int 0  # Posição para armazenar o endereço da matriz
 
 .section .text
 .globl _start
@@ -35,6 +37,15 @@ _start:
     pushl $input_valor
     call scanf
     addl $8, %esp
+
+    # Calcular o tamanho da matriz e alocar memória
+    movl linhas, %eax
+    imull colunas, %eax
+    imull $4, %eax  # Multiplicar por 4 (tamanho de um inteiro)
+    pushl %eax
+    call malloc
+    addl $4, %esp
+    movl %eax, matriz  # Guardar o endereço da matriz alocada
 
     # Imprimindo as dimensões da matriz
     pushl colunas
@@ -71,7 +82,8 @@ preencher_colunas:
     movl %esi, %eax      # i
     imull colunas        # i * colunas
     addl %edi, %eax      # i * colunas + j
-    movl %edx, matriz(, %eax, 4)  # Armazena valor
+    movl matriz, %ebx    # Carregar o endereço da matriz
+    movl %edx, (%ebx, %eax, 4)  # Armazena valor
 
     incl %edi
     jmp preencher_colunas
@@ -95,7 +107,8 @@ imprimir_colunas:
     movl %esi, %eax   # i
     imull colunas     # i * colunas
     addl %edi, %eax   # i * colunas + j
-    movl matriz(, %eax, 4), %edx  # Carregar matriz[i][j]
+    movl matriz, %ebx # Carregar o endereço da matriz
+    movl (%ebx, %eax, 4), %edx  # Carregar matriz[i][j]
 
     pushl %edx        # Valor a ser impresso
     pushl $input_valor # Formato
