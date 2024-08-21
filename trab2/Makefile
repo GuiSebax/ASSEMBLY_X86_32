@@ -1,5 +1,5 @@
 # Nome do arquivo assembly
-ASM_FILE := "NomeDoArquivo.s"
+ASM_FILE := main.s
 
 # Nome do arquivo objeto gerado
 OBJ_FILE := obj.o

@@ -523,13 +523,10 @@ busca_binaria:
     # Initialize the lower (eax) and upper (esi) bounds
     movl $0, %eax         # lower bound = 0
     movl tam, %esi        # upper bound = tam
+    subl $1, %esi         # upper bound = tam - 1
 
     # Call the binary search function
-    call binary_search
-
-binary_search:
-    # Initialize loop variables
-    subl $1, %esi         # upper bound = tam - 1
+    call binary_search_loop
 
 binary_search_loop:
     cmpl %esi, %eax       # if lower bound > upper bound
@@ -561,7 +558,7 @@ binary_search_found:
     addl $4, %esp
 
     # Exit the function
-    jmp sair
+    jmp busca_binaria
 
 binary_search_lower:
     # Set the upper bound to mid - 1
@@ -582,7 +579,7 @@ binary_search_notfound:
     addl $4, %esp
 
     # Exit the function
-    jmp sair
+    jmp busca_binaria
 
 sair:
     pushl $msg_sair
