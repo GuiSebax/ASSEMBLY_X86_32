@@ -1,10 +1,13 @@
+# Trabalho de PIHS
+# Guilherme Frare Clemente - RA:124349
+# Marcos Vinicius de Oliveira - RA:124408
 .section .data
     # Mensagens e Formatos
     menu: .string "Menu:\n1 - Menores e Maiores\n2 - Busca Binária\n3 - Sair\nEscolha uma opção: "
     opcao: .int 0
     formatOpcao: .asciz "%d"
     msg_sair: .asciz "Saindo...."
-    introMsg: .asciz "Separador de números de ponto flutuante em listas menores e maiores\n\n"
+    introMsg: .asciz "Maiores e Menores(Float)\n\n"
     promptNum: .asciz "Digite o número #%d: "
     formatInput: .asciz " %lf"
     promptPivo: .asciz "Digite o valor do pivô: "
@@ -12,9 +15,9 @@
     listStart: .asciz "["
     listFormat: .asciz " %g "
     listEnd: .asciz "]\n"
-    fpuStackMsg:  .asciz "            Pilha FPU: "
-    smallerListMsg: .asciz "          Menores que o pivô: "
-    largerListMsg: .asciz "Maiores ou iguais ao pivô: "
+    fpuStackMsg:  .asciz "  Pilha do Float: "
+    smallerListMsg: .asciz " Menores: "
+    largerListMsg: .asciz "Maiores ou iguais: "
     stackOne: .space 64  # 8 * 8 bytes
     topStackOne: .long 0
     stackTwo: .space 64
