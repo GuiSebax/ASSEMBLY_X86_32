@@ -1,4 +1,4 @@
-# ASSEMBLY_X86_32
+# AlGORITMOS EM ASSEMBLY X86
 Nesse repositório tem consigo uma ampla variedade de algoritmos desenvolvidos
 em assemblyX86 com a sintaxe -> x86 32-bit AT&T syntax
 
